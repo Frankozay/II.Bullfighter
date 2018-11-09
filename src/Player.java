@@ -4,7 +4,7 @@ public class Player {
     private String[] cardNums;//牌数，按从小到大排序
     private String[] cardColors;//牌花，按牌数顺序对应
     private String playerName;//玩家姓名
-    private String[] patterns;//牌面，如♠5♠8♠9♠10♠J
+    private Poker[] pokers = new Poker[5];//牌面，如♠5♠8♠9♠10♠J
     private String shape;//牌型，如牛七
     private static int nextNumber = 0;//编号
 
@@ -13,8 +13,10 @@ public class Player {
         playerName = name;
     }//构造
 
-    public void setPatterns(String[] patterns) {
-        this.patterns = patterns;
+    public void setPokers(Poker[] pokers) {
+        for(int i=0;i<5;i++){
+            this.pokers[i] = pokers[i];
+        }
     }//牌面
 
     public void setShape(String shape) {
@@ -45,8 +47,8 @@ public class Player {
         return shape;
     }//牌型
 
-    public String[] getPatterns() {
-        return patterns;
+    public Poker[] getPokers() {
+        return pokers;
     }//牌面
 
     public int getRank() {

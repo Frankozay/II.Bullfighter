@@ -1,11 +1,8 @@
-import java.util.Random;
-import java.util.regex.Pattern;
-
 public class BullFighter {
-    private Poker poker = new Poker();
+    private PokerOperate pokerOperate = new PokerOperate();
     private Player[] players;
     private int numbers;//玩家人数
-    private String card[];
+    private Poker[] card;
     final static private String[] cardShape = {"炸弹", "五小", "五花", "四花", "牛牛", "牛九", "牛八", "牛七", "牛六", "牛五", "牛四", "牛三",
             "牛二", "牛一", "没牛"};//最小牌型22233
     final static private String[] colors = {"♦", "♣", "♥", "♠"};
@@ -17,13 +14,14 @@ public class BullFighter {
     }
 
     public void shuffle() {
-        card = poker.Shuffle();
+        card = pokerOperate.newCard();
+        card = pokerOperate.Shuffle(card);
     }//洗牌
 
     public void deal() {
-        String[][] dealCards = poker.Deal(numbers, 5, card);
+        Poker[][] dealCards = pokerOperate.Deal(numbers, 5, card);
         for (int i = 0; i < numbers; i++) {
-            players[i].setPatterns(dealCards[i]);
+            players[i].setPokers(dealCards[i]);
         }
 
     }//发牌
@@ -134,14 +132,14 @@ public class BullFighter {
 
     public void Assign() {//先将牌型赋值给players。
         for (int i = 0; i < numbers; i++) {
-            String[] pattern = players[i].getPatterns();//得到牌面
+            Poker[] pattern = players[i].getPokers();//得到牌面
             String[] color = new String[5];//牌花色
             String[] num = new String[5];//牌点数
             int j = 0;
-            for (String temp : pattern
+            for (Poker temp : pattern
                     ) {
-                color[j] = poker.getColors(temp);
-                num[j++] = poker.getNums(temp);
+                color[j] = temp.getColor();
+                num[j++] = temp.getNum();
             }//赋值
             for (int i1 = 0; i1 < num.length - 1; i1++) {
                 for (int j1 = i1; j1 < num.length; j1++) {

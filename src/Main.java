@@ -21,9 +21,9 @@ public class Main {
         System.out.println("各玩家的手牌为:");
         for (int i = 0; i < numbers; i++) {
             System.out.print(players[i].getPlayerNumber() + "." + players[i].getPlayerName() + ":      ");
-            for (String temp : players[i].getPatterns()
+            for (Poker temp : players[i].getPokers()
                     ) {
-                System.out.print(temp + " ");
+                System.out.print(temp.getCard() + " ");
             }
             System.out.println();
         }
@@ -41,9 +41,9 @@ public class Main {
         for (int i = 0; i < numbers; i++) {
             if (players[i].getRank() == 1) {
                 System.out.println("赢家是:" + players[i].getPlayerName() + "\n" + "他的牌面和牌型是:");
-                for (String temp : players[i].getPatterns()
+                for (Poker temp : players[i].getPokers()
                         ) {
-                    System.out.print(temp + " ");
+                    System.out.print(temp.getCard() + " ");
                 }
                 System.out.println(players[i].getShape());
             }
